@@ -7,7 +7,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+const path = require('path');   
+// Configurando o Express para usar o EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Configurando o Express para servir arquivos estáticos do diretório 'public'
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Configuração do Firebase
 const firebaseConfig = {
