@@ -40,10 +40,10 @@ app.get('/', (req, res) => {
 });
 
 // Rotas
-const loginRoute = require('./routes/login');
-const principalRoute = require('./routes/principal');
-const inicialadmRoute = require('./routes/inicialadm');
-const inicialuserRoute = require('./routes/inicialuser')
+const loginRoute = require('./src/routes/login');
+const principalRoute = require('./src/routes/principal');
+const inicialadmRoute = require('./src/routes/inicialadm');
+const inicialuserRoute = require('./src/routes/inicialuser')
 
 app.use('/login', loginRoute);
 app.use('/principal', principalRoute);

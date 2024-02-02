@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
                         res.redirect('/inicialadm');
                     } else {
                         // Usuário não é admin, redirecionar para a página principal
-                        res.redirect('./inicialuser');
+                        res.redirect('/inicialuser');
                     }
                 } else {
                     // Documento do usuário não encontrado, redirecionar para a página de login
