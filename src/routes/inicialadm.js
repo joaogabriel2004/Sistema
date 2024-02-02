@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const path = require('path');   
+const path = require('path');
 
 const router = express.Router();
 const {
@@ -30,8 +30,17 @@ router.get('/', (req, res) => {
                 if (doc.exists) {
                     var papel = doc.data().papel;
                     if (papel === "admin") {
-                        // Usuário é um admin, enviar a página inicial de admin
-                        res.sendFile(inicialadmHtmlPath);
+                        // Consultar o papel do usuário no Firestore
+                        db.collection("assistidos").doc("maria").get().then((doc) => {
+                            if (doc.exists) {
+                                var dadosMaria = doc.data();
+                                console.log(dadosMaria);
+                                res.sendFile(inicialadmHtmlPath);
+                            } else {
+                            }
+                        }).catch((error) => {
+                            console.error("Erro ao obter documento:", error);
+                        });
                     } else {
                         // Usuário não é admin, redirecionar para a página de login
                         res.redirect('/login');
