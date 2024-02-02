@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Configurando o Express para servir arquivos estáticos do diretório 'public'
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, '/src/public')));
 
 // Configuração do Firebase
 const firebaseConfig = {
