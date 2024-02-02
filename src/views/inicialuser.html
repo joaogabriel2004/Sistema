@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/public/css/inicial.css">
+</head>
+
+<body onload="iniciarBanco()">
+  <div class="container">
+    <div class="sidebar">
+      <div class="profile">
+        <img src="/public/assets/corra.png" alt="User Icon" />
+        <h3 id="nome-usuario"></h3>
+      </div>
+      <ul>
+        <li><i class="fa fa-list"></i><a href="#">Lista</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <!-- Conteúdo aqui -->
+      <h1>Sistema de Gerenciamento de Usuários</h1>
+      <div class="table-container">
+        <table id="tabelaAssistidos">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Idade</th>
+              <th>Sexo</th>
+              <th>Id. Gênero</th>
+              <th>Raça/Cor</th>
+              <th>Território</th>
+              <th>CAD-ÚNICO</th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabelaAssistidos">
+            <!-- As linhas serão adicionadas aqui dinamicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="/public/script/inicialuser.js"></script>
+</body>
+
+</html>

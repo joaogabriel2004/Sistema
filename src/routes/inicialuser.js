@@ -1,6 +1,8 @@
 const express = require('express');
+const app = express();
+const path = require('path');   
+
 const router = express.Router();
-const path = require('path');
 const {
     getAuth,
     onAuthStateChanged
@@ -9,9 +11,8 @@ const {
     getFirestore,
 } = require('firebase-admin/firestore');
 
-const principalHtmlPath = path.join(__dirname, '../views/principal.html');
+const inicialuserHtmlPath = path.join(__dirname, '../views/inicialuser.html');
 
-// Rota principal
 router.get('/', (req, res) => {
     const auth = getAuth();
     const db = getFirestore();
@@ -19,19 +20,20 @@ router.get('/', (req, res) => {
     // Verificar se o usuário está autenticado
     onAuthStateChanged(auth, (user) => {
         if (user) {
+            // Usuário está logado
+
+            // Obter o email do usuário
             const email = user.email;
 
             // Consultar o papel do usuário no Firestore
             db.collection("users").doc(email).get().then((doc) => {
                 if (doc.exists) {
                     var papel = doc.data().papel;
-
-                    if (papel === "admin") {
-                        // Usuário é um admin, redirecionar para a rota de admin
-                        res.redirect('/inicialadm');
+                    if (papel === "user") {
+                        res.sendFile(inicialuserHtmlPath);
                     } else {
-                        // Usuário não é admin, redirecionar para a página principal
-                        res.redirect('./inicialuser');
+                        // Usuário não é admin, redirecionar para a página de login
+                        res.redirect('/login');
                     }
                 } else {
                     // Documento do usuário não encontrado, redirecionar para a página de login
@@ -47,6 +49,6 @@ router.get('/', (req, res) => {
             res.redirect('/login');
         }
     });
-}); 
+});
 
 module.exports = router;

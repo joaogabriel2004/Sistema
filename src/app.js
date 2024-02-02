@@ -43,10 +43,12 @@ app.get('/', (req, res) => {
 const loginRoute = require('./routes/login');
 const principalRoute = require('./routes/principal');
 const inicialadmRoute = require('./routes/inicialadm');
+const inicialuserRoute = require('./routes/inicialuser')
 
 app.use('/login', loginRoute);
 app.use('/principal', principalRoute);
 app.use('/inicialadm', inicialadmRoute);
+app.use('/inicialuser', inicialuserRoute)
 
 // Inicie o servidor
 app.listen(PORT, () => {
