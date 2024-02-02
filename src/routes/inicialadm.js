@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const path = require('path');
+const path = require('path');   
 
 const router = express.Router();
 const {
@@ -30,13 +30,14 @@ router.get('/', (req, res) => {
                 if (doc.exists) {
                     var papel = doc.data().papel;
                     if (papel === "admin") {
-                        // Consultar o papel do usuário no Firestore
+                        // Consultar o documento "maria" no Firestore
                         db.collection("assistidos").doc("maria").get().then((doc) => {
                             if (doc.exists) {
+                                // Obter todos os campos do documento "maria"
                                 var dadosMaria = doc.data();
-                                console.log(dadosMaria);
                                 res.sendFile(inicialadmHtmlPath);
                             } else {
+                                console.log("Documento 'maria' não encontrado");
                             }
                         }).catch((error) => {
                             console.error("Erro ao obter documento:", error);
@@ -60,5 +61,24 @@ router.get('/', (req, res) => {
         }
     });
 });
+
+
+
+// Rota para fornecer os dados da coleção "assistidos" para o frontend
+app.get('/dados', async (req, res) => {
+    try {
+      const snapshot = await admin.firestore().collection('assistidos').get();
+      const dados = [];
+  
+      snapshot.forEach(doc => {
+        dados.push(doc.data());
+      });
+  
+      res.json(dados);
+    } catch (error) {
+      console.error('Erro ao obter dados:', error);
+      res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+  });
 
 module.exports = router;

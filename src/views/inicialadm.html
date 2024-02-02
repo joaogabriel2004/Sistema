@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/public/css/inicial.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/public/css/inicial.css">
 </head>
-<body>
+
+<body onload="iniciarBanco()">
   <div class="container">
     <div class="sidebar">
       <div class="profile">
-        <img src="assets\corra.png" alt="User Icon" />
-        <h3>Admin</h3>
+        <img src="/public/assets/corra.png" alt="User Icon" />
+        <h3>Administrador</h3>
       </div>
       <ul>
         <li><i class="fa fa-list"></i><a href="#">Lista</a></li>
-        <li><i class="fa fa-address-book"></i><a href="#">Cadastrar</a></li>
+        <li id="abrirModalBtn"><i class="fa fa-address-book"></i><a href="#">Cadastrar</a></li>
       </ul>
     </div>
     <div class="content">
       <!-- Conteúdo aqui -->
       <h1>Sistema de Gerenciamento de Usuários</h1>
       <div class="table-container">
-        <table>
+        <table id="tabelaAssistidos">
           <thead>
             <tr>
               <th>Nome</th>
@@ -34,39 +36,48 @@
               <th>CAD-ÚNICO</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>João</td>
-              <td>20</td>
-              <td>Masculino</td>
-              <td>Hétero</td>
-              <td>Pardo</td>
-              <td>Bahia</td>
-              <td>434954</td>
-            </tr>
-            <tr>
-              <td>Maria</td>
-              <td>21</td>
-              <td>Feminino</td>
-              <td>Hétero</td>
-              <td>Pardo</td>
-              <td>Bahia</td>
-              <td>245124</td>
-            </tr>
-            <tr>
-              <td>Julia</td>
-              <td>24</td>
-              <td>Feminino</td>
-              <td>Hétero</td>
-              <td>Branco</td>
-              <td>Bahia</td>
-              <td>473224</td>
-            </tr>
-            <!-- Adicione mais linhas conforme necessário -->
+          <tbody id="corpoTabelaAssistidos">
+            <!-- As linhas serão adicionadas aqui dinamicamente -->
           </tbody>
         </table>
       </div>
     </div>
   </div>
+
+  <!-- Modal -->
+<div id="meuModal" class="modal">
+  <div class="modal-content">
+    <span class="fechar">&times;</span>
+    <h2>Adicionar Assistido</h2>
+    <form id="formAssistido">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="idade">Idade:</label>
+      <input type="number" id="idade" name="idade" required>
+
+      <label for="sexo">Sexo:</label>
+      <input type="text" id="sexo" name="sexo" required>
+
+      <label for="idGenero">Id. Gênero:</label>
+      <input type="text" id="idGenero" name="idGenero" required>
+
+      <label for="racaCor">Raça/Cor:</label>
+      <input type="text" id="racaCor" name="racaCor" required>
+
+      <label for="territorio">Território:</label>
+      <input type="text" id="territorio" name="territorio" required>
+
+      <label for="cadUnico">CAD-ÚNICO:</label>
+      <input type="text" id="cadUnico" name="cadUnico" required>
+
+      <input type="submit" value="Adicionar">
+    </form>
+  </div>
+</div>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="/public/script/inicialadm.js"></script>
 </body>
+
 </html>
